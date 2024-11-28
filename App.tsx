@@ -1,118 +1,85 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useEffect, useRef} from 'react';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import UnityView from '@azesmway/react-native-unity';
+import {Button, View} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const unityRef = useRef<UnityView>(null);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  // const options = {
+  //   method: 'POST',
+  //   headers: {
+  //     'xi-api-key': 'sk_d9c025e1cf5912ab20069e5e9a26d4ca0128f43bf23606cc',
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: '{"voice_settings":{"stability":0.5,"similarity_boost":0.5}}'
+  // };
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const options = {
+    method: 'POST',
+    headers: {
+      'xi-api-key': 'sk_d9c025e1cf5912ab20069e5e9a26d4ca0128f43bf23606cc',
+      'Content-Type': 'application/json',
+    },
+    body: '{"voice_settings":{"stability":0.5,"similarity_boost":0.5},"text":"Hello world"}',
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+  fetch(
+    'https://api.elevenlabs.io/v1/text-to-speech/9BWtsMINqrJLrRacOk9x?output_format=pcm_22050',
+    options,
+  )
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+  // uri	The target URI to which the string will be transmitted.
+  // postData	Form body data. Will be converted to UTF-8 string.
+  // contentType	Value for the Content-Type header, for example application/json.
+
+  return (
+    <View style={{flex: 1}}>
+      <UnityView
+        ref={unityRef}
+        style={{flex: 1}}
+        onUnityMessage={result => {
+          console.log('onUnityMessage', result.nativeEvent.message);
+        }}
+      />
+      <View style={{position: 'absolute', top: 50}}>
+        {/* Method to play Waving Animation : “PlayWaveAnim” with a boolean param which should be true
+to play the animation. */}
+        {/* Method to go back to Idle Animation : “PlayIdleAnim” with same param. */}
+
+        {/* // This is the main function postMessage take 3 arguments ReacttoUnity is the game Object
+    // GetDatas is the function name we will send the data to in Unity depends on hierarchy.
+    // data is the data we will send.
+
+    unityRef.current?.postMessage('ReactToUnity', 'GetDatas', data); */}
+        {/*             unityRef.current?.postMessage('BananaMan', 'PlayWaveAnim', true) */}
+
+        {/*  unityRef.current?.postMessage('BananaMan', 'PlayWaveAnim', "wave");
+             unityRef.current?.postMessage('BananaMan', 'PlayWaveAnim', "idle"); */}
+
+        {/* AnimationScene" and "SpeechScene" */}
+        <Button
+          title="Unity Action"
+          onPress={() => {
+            unityRef.current?.postMessage(
+              'BananaMan',
+              'ChangeScene',
+              'SpeechScene',
+            );
+          }}
+        />
+        {/* <Button
+          title="Play Idle Anim"
+          onPress={() => {
+            unityRef.current?.postMessage('BananaMan', 'PlaySpeech', 'idle');
+          }}
+        /> */}
+      </View>
+    </View>
+  );
+};
 
 export default App;
