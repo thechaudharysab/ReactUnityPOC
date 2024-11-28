@@ -36,6 +36,14 @@ const App = () => {
   // postData	Form body data. Will be converted to UTF-8 string.
   // contentType	Value for the Content-Type header, for example application/json.
 
+  const data = {
+    speechText: 'Welcome to Pailo!',
+    voiceId: '21m00Tcm4TlvDq8ikWAM',
+    elAPIKey: 'sk_d9c025e1cf5912ab20069e5e9a26d4ca0128f43bf23606cc',
+  };
+
+  const jsonString = JSON.stringify(data);
+
   return (
     <View style={{flex: 1}}>
       <UnityView
@@ -60,14 +68,19 @@ to play the animation. */}
         {/*  unityRef.current?.postMessage('BananaMan', 'PlayWaveAnim', "wave");
              unityRef.current?.postMessage('BananaMan', 'PlayWaveAnim', "idle"); */}
 
+        {/* GO = "DataReceiver"
+Method = "GetData"
+Param = "JSONString" e.g. "{ \"speechText\": \"Hello World\", \"voiceId\": \"pqHfZKP75CvOlQylNhV4\", \"elAPIKey\": \"sk_d9c025e1cf5912ab20069e5e9a26d4ca0128f43bf23606cc\" }" */}
+
         {/* AnimationScene" and "SpeechScene" */}
+
         <Button
           title="Unity Action"
           onPress={() => {
             unityRef.current?.postMessage(
-              'BananaMan',
-              'ChangeScene',
-              'SpeechScene',
+              'DataReceiver',
+              'GetData',
+              jsonString,
             );
           }}
         />
