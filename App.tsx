@@ -37,8 +37,8 @@ const App = () => {
   // contentType	Value for the Content-Type header, for example application/json.
 
   const data = {
-    speechText: 'Welcome to Pailo!',
-    voiceId: '21m00Tcm4TlvDq8ikWAM',
+    speechText: 'Hello World',
+    voiceId: 'pqHfZKP75CvOlQylNhV4', // 21m00Tcm4TlvDq8ikWAM
     elAPIKey: 'sk_d9c025e1cf5912ab20069e5e9a26d4ca0128f43bf23606cc',
   };
 
