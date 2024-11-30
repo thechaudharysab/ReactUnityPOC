@@ -1,9 +1,0 @@
-{
-  "Messages": [
-    {
-      "Type": 1,
-      "Text": "Unity.IL2CPP.Building.BuilderFailedException: Build failed with 0 successful nodes and 0 failed ones\nError: Internal build system error. Backend exited with code 137.\n\n\n   at il2cpp.Program.DoRun(TinyProfiler2 tinyProfiler, String[] args, RuntimePlatform platform, Il2CppCommandLineArguments il2CppCommandLineArguments, BuildingOptions buildingOptions, Boolean throwExceptions) in /Users/bokken/build/output/unity/il2cpp/il2cpp/Program.cs:line 319"
-    }
-  ],
-  "CommandLine": "--compile-cpp --platform=Android --architecture=armv7 --outputpath=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/src/main/jniLibs/armeabi-v7a/libil2cpp.so --baselib-directory=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/src/main/jniStaticLibs/armeabi-v7a --incremental-g-c-time-slice=3 --configuration=Release --dotnetprofile=unityaot-linux --profiler-report --profiler-output-file=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/build/il2cpp_armeabi-v7a_Release/il2cpp_conv.traceevents --print-command-line --data-folder=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/src/main/Il2CppOutputProject/Source/il2cppOutput/data --generatedcppdir=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/src/main/Il2CppOutputProject/Source/il2cppOutput --cachedirectory=/Users/chaudhrytalha/Documents/Projects/ReactUnityPOC/unity/builds/android/unityLibrary/build/il2cpp_armeabi-v7a_Release/il2cpp_cache --tool-chain-path=/Users/chaudhrytalha/Library/Android/sdk/ndk/26.1.10909125"
-}
